@@ -1,0 +1,20 @@
+# {{.Name}}
+
+*Datum eingereicht:*  {{.Timestamp}}
+
+*Email:*              {{.EMail}}
+
+*Telefon:*            {{.Telephone}}
+
+*Sprache:*           {{.Language}}
+
+## Abstract
+
+{{.Abstract}}
+
+## Bio ({{.Name}})
+
+{{.Bio}}
+
+<div style="page-break-after: always;"></div>
+
