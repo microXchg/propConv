@@ -50,12 +50,11 @@ func main() {
 	csvReader.Read()
 	content, _ := csvReader.ReadAll()
 
-	t,_ := template.ParseFiles("md-template.ctmpl")
+	t, _ := template.ParseFiles("md-template.ctmpl")
 
-	for _,line := range content {
+	for _, line := range content {
 		record := recordToStruct(line)
-        t.Execute(os.Stdout, record)
+		t.Execute(os.Stdout, record)
 	}
-
 
 }
