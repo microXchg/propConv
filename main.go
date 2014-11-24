@@ -13,13 +13,15 @@ type entry struct {
 	EMail     string
 	Telephone string
 	Language  string
+	Status    string
+	Confirmed string
 	Abstract  string
 	Bio       string
 }
 
 func recordToStruct(record []string) entry {
 
-	fullsizeArray := make([]string, 7) //prevent index out of bounds
+	fullsizeArray := make([]string, 9) //prevent index out of bounds
 	copy(fullsizeArray, record)
 
 	e := entry{}
@@ -29,8 +31,10 @@ func recordToStruct(record []string) entry {
 	e.EMail = fullsizeArray[2]
 	e.Telephone = fullsizeArray[3]
 	e.Language = fullsizeArray[4]
-	e.Abstract = fullsizeArray[5]
-	e.Bio = fullsizeArray[6]
+	e.Status = fullsizeArray[5]
+	e.Confirmed = fullsizeArray[6]
+	e.Abstract = fullsizeArray[7]
+	e.Bio = fullsizeArray[8]
 	return e
 }
 
@@ -50,11 +54,13 @@ func main() {
 	csvReader.Read()
 	content, _ := csvReader.ReadAll()
 
-	t, _ := template.ParseFiles("md-template.ctmpl")
+	t, _ := template.ParseFiles("schedule-template.ctmpl")
 
 	for _, line := range content {
 		record := recordToStruct(line)
-		t.Execute(os.Stdout, record)
+		if record.Status == "1" {
+			t.Execute(os.Stdout, record)
+		}
 	}
 
 }

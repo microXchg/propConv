@@ -1,0 +1,16 @@
+                                        <li class="accordion">
+                                            <a class="accordion-heading">
+                                                <time>xx:xx</time>
+                                                <h4 class="accordion-title">{{.Name}}: </h4>
+                                                <span class="fa fa-plus-circle pull-right"></span>
+                                            </a>
+                                            <div class="accordion-body">
+                                                <h4>Language: {{.Language}}</h4>
+                                                <p>{{.Abstract}}</p>
+                                                <h4>{{.Name}}</h4>
+                                                <p>{{.Bio}}</p>
+                                            </div>
+                                        </li>
+
+
+
