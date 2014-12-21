@@ -9,6 +9,7 @@
                                                 <p>{{.Abstract}}</p>
                                                 <h4>{{.Name}}</h4>
                                                 <p>{{.Bio}}</p>
+                                                <p><a href="talk/{{.Url}}.html">... more</a>
                                             </div>
                                         </li>
 

@@ -22,7 +22,7 @@ type entry struct {
 	Title     string
 	Abstract  string
 	Bio       string
-	Remarks   string
+	Url   string
 }
 
 func recordToStruct(record []string) entry {
@@ -45,7 +45,7 @@ func recordToStruct(record []string) entry {
 	e.Title = fullsizeArray[10]
 	e.Abstract = fullsizeArray[11]
 	e.Bio = fullsizeArray[12]
-	e.Remarks = fullsizeArray[13]
+	e.Url = fullsizeArray[13]
 	return e
 }
 
