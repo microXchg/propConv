@@ -1,6 +1,6 @@
 # Proposal Converter
 
-A simple tool to convert the CfPs from .csv format to .md in order to make them more readable.
+A simple tool to convert the CfPs from .csv format to respective formats for the webpage.
 
 ## Build
 
@@ -10,12 +10,16 @@ A simple tool to convert the CfPs from .csv format to .md in order to make them 
 go build
 ```
 
-## Usage
+## Usage for Schedule
 
 ```
-propConv <CSV-FILE>
+propConv -i <CSV-FILE> -d 1 -t 1
 ```
 
-This will convert the Proposals and print them on Standard Out. (redirect as you like)
+This will convert the Proposals for day 1 and track 1 and print on Standard Out. (redirect as you like)
 
+
+## Usage for generating subpages
+
+TODO
 
