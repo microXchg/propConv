@@ -3,15 +3,17 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
-	"html/template"
 	"os"
 	"flag"
+	"html/template"
+	"log"
 )
 
 type entry struct {
 	Name      string
 	EMail     string
 	Photo	  string
+	Twitter   string
 	Telephone string
 	Language  string
 	Day       string
@@ -57,6 +59,11 @@ func main() {
 	flag.StringVar(&day, "d", "1", "Day for which schedule should be generated.")
 	var track string
 	flag.StringVar(&track, "t", "1", "Track for which schedule should be generated.")
+	var detail bool
+	flag.BoolVar(&detail, "detail", false, "Set to generate the single pages instead of schedule-html. Day and Track will be ignored.")
+	var outdir string
+	flag.StringVar(&outdir, "outdir", "talk", "Locaction where the generated single pages should be saved.")
+
 
 	flag.Parse()
 
@@ -74,6 +81,14 @@ func main() {
 	csvReader.Read()
 	content, _ := csvReader.ReadAll()
 
+	if detail {
+		writeDetailPages(outdir, content)
+	} else {
+		writeScheduleHtml(day, track, content)
+	}
+}
+
+func writeScheduleHtml(day string, track string, content [][]string) {
 	t, _ := template.ParseFiles("schedule-template.ctmpl")
 
 	fmt.Printf("<!-- START day %s track %s -->\n", day, track)
@@ -85,4 +100,22 @@ func main() {
 	}
 	fmt.Printf("<!-- END day %s track %s -->\n", day, track)
 
+}
+
+func writeDetailPages(outdir string, content [][]string) {
+	t, _ := template.ParseFiles("singlepage-template.ctmpl")
+
+	for _, line := range content {
+		record := recordToStruct(line)
+		filename := outdir + "/" + record.Url + ".html"
+		outfile, err := os.Create(filename)
+
+		if err!=nil {
+			log.Fatalf("Could not create Outputfile with name: %s", filename)
+		}
+
+		defer outfile.Close()
+
+		t.Execute(outfile, record)
+	}
 }

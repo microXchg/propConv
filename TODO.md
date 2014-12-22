@@ -1,0 +1,4 @@
+- Single Pages for Talks
+    - Twitterhandles for all Speakers
+    - Working Home Button in Template
+    - Heading when page is compressed

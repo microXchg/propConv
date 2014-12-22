@@ -21,5 +21,9 @@ This will convert the Proposals for day 1 and track 1 and print on Standard Out.
 
 ## Usage for generating subpages
 
-TODO
+```
+propConv -i <CSV-FILE> -detail -outdir <OUTPUT-DIR>
+```
+
+This will generate all single pages for all talks and save them in OUTPUT-DIR.
 
