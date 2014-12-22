@@ -29,7 +29,7 @@ type entry struct {
 
 func recordToStruct(record []string) entry {
 
-	fullsizeArray := make([]string, 14) //prevent index out of bounds
+	fullsizeArray := make([]string, 15) //prevent index out of bounds
 	copy(fullsizeArray, record)
 
 	e := entry{}
@@ -37,17 +37,18 @@ func recordToStruct(record []string) entry {
 	e.Name = fullsizeArray[0]
 	e.EMail = fullsizeArray[1]
 	e.Photo = fullsizeArray[2]
-	e.Telephone = fullsizeArray[3]
-	e.Language = fullsizeArray[4]
-	e.Day = fullsizeArray[5]
-	e.Track = fullsizeArray[6]
-	e.Time = fullsizeArray[7]
-	e.Status = fullsizeArray[8]
-	e.Confirmed = fullsizeArray[9]
-	e.Title = fullsizeArray[10]
-	e.Abstract = fullsizeArray[11]
-	e.Bio = fullsizeArray[12]
-	e.Url = fullsizeArray[13]
+	e.Twitter = fullsizeArray[3]
+	e.Telephone = fullsizeArray[4]
+	e.Language = fullsizeArray[5]
+	e.Day = fullsizeArray[6]
+	e.Track = fullsizeArray[7]
+	e.Time = fullsizeArray[8]
+	e.Status = fullsizeArray[9]
+	e.Confirmed = fullsizeArray[10]
+	e.Title = fullsizeArray[11]
+	e.Abstract = fullsizeArray[12]
+	e.Bio = fullsizeArray[13]
+	e.Url = fullsizeArray[14]
 	return e
 }
 

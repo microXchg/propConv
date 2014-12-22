@@ -1,4 +1,3 @@
 - Single Pages for Talks
-    - Twitterhandles for all Speakers
-    - Working Home Button in Template
-    - Heading when page is compressed
+    - Heading when page is not very wide
+    - handling multiple speakers (photos, layout, twitter)
