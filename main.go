@@ -7,6 +7,7 @@ import (
 	"flag"
 	"html/template"
 	"log"
+	"strings"
 )
 
 type entry struct {
@@ -36,7 +37,7 @@ func recordToStruct(record []string) entry {
 
 	e.Name = fullsizeArray[0]
 	e.EMail = fullsizeArray[1]
-	e.Photo = fullsizeArray[2]
+	e.Photo = strings.Fields(fullsizeArray[2])[0]
 	e.Twitter = fullsizeArray[3]
 	e.Telephone = fullsizeArray[4]
 	e.Language = fullsizeArray[5]
