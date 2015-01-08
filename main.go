@@ -2,19 +2,25 @@ package main
 
 import (
 	"encoding/csv"
-	"fmt"
-	"os"
 	"flag"
+	"fmt"
 	"html/template"
 	"log"
+	"os"
 	"strings"
 )
 
+type speaker struct {
+	Name    string
+	Photo   string
+	Twitter string
+}
+
 type entry struct {
-	Name      string
+	Name      string //to be compatible
 	EMail     string
-	Photo	  string
-	Twitter   string
+	Photo     string //to be compatible
+	Twitter   string //to be compatible
 	Telephone string
 	Language  string
 	Day       string
@@ -25,7 +31,8 @@ type entry struct {
 	Title     string
 	Abstract  string
 	Bio       string
-	Url   string
+	Url       string
+	Speakers  []speaker
 }
 
 func recordToStruct(record []string) entry {
@@ -35,6 +42,7 @@ func recordToStruct(record []string) entry {
 
 	e := entry{}
 
+	//e.Name =
 	e.Name = fullsizeArray[0]
 	e.EMail = fullsizeArray[1]
 	e.Photo = strings.Fields(fullsizeArray[2])[0]
@@ -50,13 +58,32 @@ func recordToStruct(record []string) entry {
 	e.Abstract = fullsizeArray[12]
 	e.Bio = fullsizeArray[13]
 	e.Url = fullsizeArray[14]
+
+	//now convert multifields
+	names := strings.FieldsFunc(fullsizeArray[0], func(c rune) bool { return c == '&' })
+	photos := strings.Fields(fullsizeArray[2])
+	twitters := strings.Fields(fullsizeArray[3])
+	speakers := make([]speaker, len(names))
+	for i, name := range names {
+		s := speaker{}
+		s.Name = name
+		if len(photos) > i {
+			s.Photo = photos[i]
+		}
+		if len(twitters) > i {
+			s.Twitter = twitters[i]
+		}
+		speakers[i] = s
+	}
+	e.Speakers = speakers
+
 	return e
 }
 
 func main() {
 
-	var infilename  string
-	flag.StringVar(&infilename,"i", "", "Csv file containing the input data.")
+	var infilename string
+	flag.StringVar(&infilename, "i", "", "Csv file containing the input data.")
 	var day string
 	flag.StringVar(&day, "d", "1", "Day for which schedule should be generated.")
 	var track string
@@ -65,7 +92,6 @@ func main() {
 	flag.BoolVar(&detail, "detail", false, "Set to generate the single pages instead of schedule-html. Day and Track will be ignored.")
 	var outdir string
 	flag.StringVar(&outdir, "outdir", "talk", "Locaction where the generated single pages should be saved.")
-
 
 	flag.Parse()
 
@@ -112,7 +138,7 @@ func writeDetailPages(outdir string, content [][]string) {
 		filename := outdir + "/" + record.Url + ".html"
 		outfile, err := os.Create(filename)
 
-		if err!=nil {
+		if err != nil {
 			log.Fatalf("Could not create Outputfile with name: %s", filename)
 		}
 
