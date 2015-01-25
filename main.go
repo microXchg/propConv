@@ -32,12 +32,13 @@ type entry struct {
 	Abstract  string
 	Bio       string
 	Url       string
+	Details   string
 	Speakers  []speaker
 }
 
 func recordToStruct(record []string) entry {
 
-	fullsizeArray := make([]string, 15) //prevent index out of bounds
+	fullsizeArray := make([]string, 16) //prevent index out of bounds
 	copy(fullsizeArray, record)
 
 	e := entry{}
@@ -45,7 +46,9 @@ func recordToStruct(record []string) entry {
 	//e.Name =
 	e.Name = fullsizeArray[0]
 	e.EMail = fullsizeArray[1]
-	e.Photo = strings.Fields(fullsizeArray[2])[0]
+	if len(fullsizeArray[2]) > 0 {
+		e.Photo = strings.Fields(fullsizeArray[2])[0]
+	}
 	e.Twitter = fullsizeArray[3]
 	e.Telephone = fullsizeArray[4]
 	e.Language = fullsizeArray[5]
@@ -58,6 +61,7 @@ func recordToStruct(record []string) entry {
 	e.Abstract = fullsizeArray[12]
 	e.Bio = fullsizeArray[13]
 	e.Url = fullsizeArray[14]
+	e.Details = fullsizeArray[15]
 
 	//now convert multifields
 	names := strings.FieldsFunc(fullsizeArray[0], func(c rune) bool { return c == '&' })

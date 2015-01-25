@@ -1,17 +1,15 @@
-                                        <li class="accordion">
+                                        <li class="accordion {{if .Name}}{{else}}break{{end}}">
                                             <a class="accordion-heading">
                                                 <time>{{.Time}}</time>
-                                                <h4 class="accordion-title">{{.Title}} ({{.Name}})</h4>
-                                                <span class="fa fa-plus-circle pull-right"></span>
+                                                <h4 class="accordion-title">{{.Title}} {{if .Name}}({{.Name}}){{end}}</h4>
+                                                {{if eq .Details "1"}} <span class="fa fa-plus-circle pull-right"></span> {{end}}
                                             </a>
-                                            <div class="accordion-body">
+                                            {{if eq .Details "1"}}<div class="accordion-body">
                                                 <h4>Language: {{.Language}}</h4>
                                                 <p>{{.Abstract}}</p>
-                                                <h4>{{.Name}}</h4>
-                                                <p>{{.Bio}}</p>
+                                                {{if .Name}}<h4>{{.Name}}</h4>{{end}}
+                                                {{if .Bio}}<p>{{.Bio}}</p>{{end}}
                                                 <p><a href="talk/{{.Url}}.html">... more</a>
-                                            </div>
+                                            </div>{{end}}
                                         </li>
-
-
 

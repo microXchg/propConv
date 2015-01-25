@@ -1,3 +1,2 @@
 - Single Pages for Talks
     - Heading when page is not very wide
-    - handling multiple speakers (photos, layout, twitter)
